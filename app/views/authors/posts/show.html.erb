@@ -1,0 +1,20 @@
+
+<%= link_to 'Destroy', post_path, class: 'btn btn-danger btn-lg float-right mb-2', method: :delete, data: { confirm: 'Are you sure?' } %>
+<br>
+<br>
+<br>
+<div class="card">
+  <div class="card-body">
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @post.description %>
+</p>
+<%= link_to 'Back', posts_path, class: 'btn btn-secondary btn-lg float-right' %>
+</div>
+  </div>
+<!-- <%= link_to 'Edit', edit_post_path(@post) %> -->
