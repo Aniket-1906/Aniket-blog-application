@@ -2,11 +2,13 @@
 
 <h4 class='d-flex justify-content-between mb-4'>
   <span>Posts</span>
-  <%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>
+  <% if author_signed_in? %>
+    <%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>
+  <% end %>
 </h4>
 
 <% @posts.each do |post|%>
-  <%= link_to edit_post_path(post), class: 'text-decoration-none' do %>
+  <%= link_to post_path(post), class: 'text-decoration-none' do %>
     <div class="card mb-3">
       <div class="card-body">
         <h5 class='card-title mb-1 text-dark'><%= post.title %></h5>
@@ -14,8 +16,13 @@
       </div>
     </div>
   <% end %>
-  <p><%= link_to (image_tag 'like.jpg',:style => "width:25px;") ,like_posts_path(:id => post.id) %></p>
-  <%= post.like_count %>
+  <p class="d-flex justify-content-between">
+    <span>
+      <%= link_to (image_tag 'like.jpg',:style => "width:25px;") ,like_posts_path(:id => post.id) %>
+      <%= post.like_count %>
+    </span>
+    <span> Views: <%= post.impressionist_count %> </span>
+  </p>
 
 <% end %>
 

@@ -1,15 +1,18 @@
 module Authors
 
-class PostsController < AuthorsController
+class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_author!, except: [:index, :show]
+  layout 'authors'
 
   # GET /posts
   def index
-    @posts = current_author.posts
+    @posts = Post.all
   end
 
   # GET /posts/1
   def show
+    impressionist(@post)
   end
 
 
@@ -62,7 +65,7 @@ class PostsController < AuthorsController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = current_author.posts.find(params[:id])
+      @post = Post.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

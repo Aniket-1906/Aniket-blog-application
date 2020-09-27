@@ -14,9 +14,12 @@
     <div class="container">
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-
-        <%= link_to "Logout", destroy_author_session_path, method: :delete, class: 'btn btn-warning mb-5' %>
-        <br>
+        <% if author_signed_in? %>
+          <%= link_to "Logout", destroy_author_session_path, method: :delete, class: 'btn btn-warning mb-5' %>
+          <br>
+        <% else %>
+          <%= link_to "Login", new_author_session_path, method: :get, class: 'btn btn-success mb-5' %>
+        <% end %>
       <%= yield %>
     </div>
   </body>
