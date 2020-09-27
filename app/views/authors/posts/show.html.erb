@@ -1,7 +1,7 @@
 
 <% if author_signed_in? %>
   <% if @post.author == current_author %>
-    <%= link_to 'Destroy', post_path, class: 'btn btn-danger btn-lg float-right mb-2', method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= link_to 'Destroy', post_path, class: 'btn btn-danger btn-lg float-right mb-3', method: :delete, data: { confirm: 'Are you sure?' } %>
   <% end %>
 <% end %>
 
