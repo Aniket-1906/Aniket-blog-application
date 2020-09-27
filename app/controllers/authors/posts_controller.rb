@@ -2,12 +2,12 @@ module Authors
 
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_author!, except: [:index, :show]
+  before_action :authenticate_author!, except: [:index, :show, :like]
   layout 'authors'
 
   # GET /posts
   def index
-    @posts = Post.all
+    @posts = Post.all.order(:created_at)
   end
 
   # GET /posts/1
@@ -15,15 +15,13 @@ class PostsController < ApplicationController
     impressionist(@post)
   end
 
-
-
   def like
     @post = Post.find(params[:id])
     #raise @post.like_count.inspect
     like = @post.like_count.nil? ? 0.to_i : @post.like_count
     #raise like.inspect
     like_new = like + 1.to_i
-@post.update_attributes(:like_count => like_new)
+    @post.update_attributes(:like_count => like_new)
     redirect_to posts_path
   end
 
